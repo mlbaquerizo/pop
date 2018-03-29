@@ -9,6 +9,9 @@ export(float) var firing_rate = 0.25
 var screensize
 var input_direction = Vector2()
 var speed = 0
+var tilt_state = "neutral" setget set_tilt_state
+
+onready var anim_player = $Sprite/AnimationPlayer
 
 func _ready():
 	screensize = get_viewport_rect().size
@@ -28,7 +31,6 @@ func _input(event):
 	var input_move_left = Input.is_action_pressed("move_left")
 	
 	var not_moving = !(input_move_up || input_move_right || input_move_down || input_move_left)
-	var moving = move_up || move_right || move_down || move_left
 	
 	if move_up:
 		if input_move_down:
@@ -39,8 +41,12 @@ func _input(event):
 	if move_right:
 		if input_move_left:
 			self.input_direction.x = 0
+			if self.tilt_state == "left" || self.tilt_state == "right":
+				self.return_to_neutral(self.tilt_state)
+				self.set_tilt_state("neutral")
 		else:
 			self.input_direction.x = 1
+			self.set_tilt_state("right")
 	
 	if move_down:
 		if input_move_up:
@@ -51,16 +57,22 @@ func _input(event):
 	if move_left:
 		if input_move_right:
 			self.input_direction.x = 0
+			if self.tilt_state == "left" || self.tilt_state == "right":
+				self.return_to_neutral(self.tilt_state)
+				self.set_tilt_state("neutral")
 		else:
 			self.input_direction.x = -1
+			self.set_tilt_state("left")
 	
 	if event.is_action_released("move_right"):
 		if input_move_left:
 			self.input_direction.x = -1
+			self.set_tilt_state("left")
 	
 	if event.is_action_released("move_left"):
 		if input_move_right:
 			self.input_direction.x = 1
+			self.set_tilt_state("right")
 	
 	if event.is_action_released("move_up"):
 		if input_move_down:
@@ -75,6 +87,9 @@ func _input(event):
 	
 	if !(input_move_right || input_move_left):
 		self.input_direction.x = 0
+		if self.tilt_state == "left" || self.tilt_state == "right":
+			self.return_to_neutral(self.tilt_state)
+			self.set_tilt_state("neutral")
 		
 	if not_moving:
 		self.input_direction = Vector2()
@@ -103,6 +118,13 @@ func _process(delta):
 
 func tilt(direction):
 	# Play tilt animation for the correct direction
+	var tilt_str = "tilt_%s"
+	self.anim_player.play(tilt_str % direction)
+	pass
+
+func return_to_neutral(from_dir):
+	var tilt_str = "tilt_%s"
+	self.anim_player.play_backwards(tilt_str % from_dir)
 	pass
 
 func shoot():
@@ -110,9 +132,15 @@ func shoot():
 	# Play shooting animation
 	pass
 
-func set_health(new_value):
-	health = new_value
+func set_health(new_health):
+	health = new_health
 	
 	if health <= 0:
 		self.queue_free()
+	pass
+	
+func set_tilt_state(new_state):
+	tilt_state = new_state
+	if new_state == "left" || new_state == "right":
+		self.tilt(new_state)
 	pass
