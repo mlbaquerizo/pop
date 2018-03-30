@@ -1,13 +1,14 @@
 extends Area2D
 
 export(float) var health = 4.0 setget set_health
-export(float) var MAX_SPEED = 1000
-export(float) var ACCELERATION = 4000
-export(float) var DECELERATION = 800
+export(int) var MAX_SPEED
+export(int) var ACCELERATION
+export(int) var DECELERATION
 export(float) var firing_rate = 0.25
 
 var screensize
 var input_direction = Vector2()
+var direction = Vector2()
 var speed = 0
 var tilt_state = "neutral" setget set_tilt_state
 
@@ -31,7 +32,7 @@ func _input(event):
 	var input_move_left = Input.is_action_pressed("move_left")
 	
 	var not_moving = !(input_move_up || input_move_right || input_move_down || input_move_left)
-	
+
 	if move_up:
 		if input_move_down:
 			self.input_direction.y = 0
@@ -74,7 +75,7 @@ func _input(event):
 			self.input_direction.x = 1
 			self.set_tilt_state("right")
 	
-	if event.is_action_released("move_up"):
+	if event.is_action_released("move_up"): 
 		if input_move_down:
 			self.input_direction.y = 1
 	
@@ -83,10 +84,11 @@ func _input(event):
 			self.input_direction.y = -1
 	
 	if !(input_move_up || input_move_down):
-		self.input_direction.y = 0
+		#self.input_direction.y = 0
+		pass
 	
 	if !(input_move_right || input_move_left):
-		self.input_direction.x = 0
+		#self.input_direction.x = 0
 		if self.tilt_state == "left" || self.tilt_state == "right":
 			self.return_to_neutral(self.tilt_state)
 			self.set_tilt_state("neutral")
@@ -94,18 +96,25 @@ func _input(event):
 	if not_moving:
 		self.input_direction = Vector2()
 	
+	if self.input_direction.length():
+		self.direction = self.input_direction
+	
+	print("INPUT DIR", self.input_direction)
+	print("DIR", self.direction)
+	
 	pass
 
 func _process(delta):
 	var velocity = Vector2()
 	
-	if self.input_direction.length() != 0:
+	if self.input_direction.length():
 		self.speed += self.ACCELERATION * delta
 	else:
 		self.speed -= self.DECELERATION * delta
-	
+
 	self.speed = clamp(self.speed, 0, self.MAX_SPEED)
-	velocity += self.input_direction.normalized() * self.speed
+	
+	velocity += self.direction.normalized() * self.speed
 	
 	var new_pos = self.position
 	new_pos += velocity * delta
