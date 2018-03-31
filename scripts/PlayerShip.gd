@@ -99,9 +99,6 @@ func _input(event):
 	if self.input_direction.length():
 		self.direction = self.input_direction
 	
-	print("INPUT DIR", self.input_direction)
-	print("DIR", self.direction)
-	
 	pass
 
 func _process(delta):
