@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 50, 50 )
+extents = Vector2( 46, 52 )
 
 [sub_resource type="Animation" id=2]
 
@@ -58,17 +58,16 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pause", "Pickable", "Transform", "Visibility", "Z Index" ]
-__meta__ = {
-"_edit_group_": true
-}
 health = 4.0
-MAX_SPEED = 1000
+MAX_SPEED = 700
 ACCELERATION = 4000
-DECELERATION = 800
+DECELERATION = 1000
 firing_rate = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
+position = Vector2( 0, 2 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
