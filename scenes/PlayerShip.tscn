@@ -5,8 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 0, 0 )
-_sections_unfolded = [ "Resource" ]
+extents = Vector2( 10, 10 )
 
 [sub_resource type="Animation" id=2]
 
@@ -46,7 +45,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[node name="PlayerShip" type="Area2D" index="0"]
+[node name="PlayerShip" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
