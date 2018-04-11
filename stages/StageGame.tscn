@@ -1,5 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="StageGame" type="Node"]
+[ext_resource path="res://scenes/DummyShip.tscn" type="PackedScene" id=1]
+
+[node name="StageGame" type="Node" index="0"]
+
+[node name="DummyShip" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 316.924, 912.819 )
 
 
