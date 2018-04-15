@@ -22,7 +22,7 @@ _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pause", "Pickable"
 __meta__ = {
 "_edit_group_": true
 }
-SPEED = -1000
+VELOCITY = Vector2( 0, 0 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

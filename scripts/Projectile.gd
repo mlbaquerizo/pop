@@ -2,7 +2,7 @@
 
 extends Area2D
 
-export(int) var SPEED
+export(Vector2) var VELOCITY
 
 func _ready():
 	set_process(true)
@@ -12,5 +12,5 @@ func _ready():
 	pass
 
 func _process(delta):
-	self.translate(Vector2(0, self.SPEED) * delta)
+	self.translate(self.VELOCITY * delta)
 	pass
