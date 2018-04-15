@@ -8,9 +8,8 @@
 custom_solver_bias = 0.0
 extents = Vector2( 6, 12 )
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" index="0"]
 
-position = Vector2( 323, 948 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -19,6 +18,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pause", "Pickable", "Transform", "Visibility", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
