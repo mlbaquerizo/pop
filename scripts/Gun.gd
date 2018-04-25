@@ -2,9 +2,9 @@
 
 extends Node2D
 
-var level = 2
+var level = 0
 
-export(Array, Array, int) var GUN_POSITIONS
+export(Array, Array, int) var GUN_LEVEL_POSITIONS
 # = [
 #	[0],
 #	[1,2],

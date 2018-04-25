@@ -17,7 +17,7 @@ extents = Vector2( 34.5, 39 )
 
 script/source = "extends 'res://scripts/Gun.gd'"
 
-[node name="DummyShip" instance=ExtResource( 1 )]
+[node name="DummyShip" index="0" instance=ExtResource( 1 )]
 
 script = SubResource( 3 )
 MAX_SPEED = 700
@@ -37,7 +37,7 @@ texture = ExtResource( 2 )
 [node name="Gun" parent="." index="2" instance=ExtResource( 3 )]
 
 script = SubResource( 4 )
-GUN_POSITIONS = [ [ 0 ], [ 1, 2 ], [ 0, 1, 2 ] ]
+GUN_LEVEL_POSITIONS = [ [ 0 ], [ 1, 2 ], [ 0, 1, 2 ] ]
 
 [node name="Position0" parent="Gun" index="0"]
 
