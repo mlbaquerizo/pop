@@ -151,13 +151,14 @@ func _handle_shoot_button_pressed(event):
 
 func shoot():
 	var gun_node = $Gun
-	var cannons = gun_node.get_children()
-	
-	for i in gun_node.GUN_POSITIONS[gun_node.level]:
-		var cannon = cannons[i]
-		var pos = cannon.get_global_position()
-		gun_node.create_projectile(pos)
-		pass
+	if gun_node:
+		var cannons = gun_node.get_children()
+		if cannons.size() > 0:
+			for i in gun_node.GUN_LEVEL_POSITIONS[gun_node.level]:
+				var cannon = cannons[i]
+				var pos = cannon.get_global_position()
+				gun_node.create_projectile(pos)
+				pass
 	#for i range(cannons.length):
 	#	if 
 	#	var cannon = $Gun.get_children()[i]
