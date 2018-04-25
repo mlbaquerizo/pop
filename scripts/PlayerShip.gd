@@ -145,7 +145,6 @@ func _handle_shoot_button_pressed(event):
 	var shoot = event.is_action_pressed("shoot")
 	
 	if(shoot):
-		print("PEW")
 		self.shoot()
 	pass
 
