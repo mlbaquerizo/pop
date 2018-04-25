@@ -57,9 +57,9 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pause", "Pickable", "Transform", "Visibility", "Z Index" ]
 health = 4.0
-MAX_SPEED = 700
-ACCELERATION = 4000
-DECELERATION = 1000
+MAX_SPEED = 0
+ACCELERATION = 0
+DECELERATION = 0
 firing_rate = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]

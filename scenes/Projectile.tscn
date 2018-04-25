@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 6, 12 )
 
-[node name="Projectile" type="Area2D" index="0"]
+[node name="Projectile" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -22,7 +22,7 @@ _sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pause", "Pickable"
 __meta__ = {
 "_edit_group_": true
 }
-VELOCITY = Vector2( 0, 0 )
+VELOCITY = Vector2( 0, -1000 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
