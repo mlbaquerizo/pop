@@ -23,6 +23,44 @@ func _ready():
 	pass
 
 func _input(event):
+	_handle_movement(event)
+	_handle_shoot_button_pressed(event)
+	pass
+
+func _process(delta):
+	var velocity = Vector2()
+	
+	if self.input_direction.length():
+		self.speed += self.ACCELERATION * delta
+	else:
+		self.speed -= self.DECELERATION * delta
+
+	self.speed = clamp(self.speed, 0, self.MAX_SPEED)
+	
+	velocity += self.direction.normalized() * self.speed
+	
+	var new_pos = self.position
+	new_pos += velocity * delta
+	new_pos.x = clamp(new_pos.x, 60, screensize.x - 60)
+	new_pos.y = clamp(new_pos.y, 60, screensize.y - 60)
+	
+	self.position = new_pos
+	
+	var root = get_tree().get_root()
+	pass
+
+func tilt(direction):
+	# Play tilt animation for the correct direction
+	var tilt_str = "tilt_%s"
+	self.anim_player.play(tilt_str % direction)
+	pass
+
+func return_to_neutral(from_dir):
+	var tilt_str = "tilt_%s"
+	self.anim_player.play_backwards(tilt_str % from_dir)
+	pass
+
+func _handle_movement(event):
 	var move_up = event.is_action_pressed("move_up")
 	var move_right = event.is_action_pressed("move_right")
 	var move_down = event.is_action_pressed("move_down")
@@ -103,41 +141,28 @@ func _input(event):
 	
 	pass
 
-func _process(delta):
-	var velocity = Vector2()
+func _handle_shoot_button_pressed(event):
+	var shoot = event.is_action_pressed("shoot")
 	
-	if self.input_direction.length():
-		self.speed += self.ACCELERATION * delta
-	else:
-		self.speed -= self.DECELERATION * delta
-
-	self.speed = clamp(self.speed, 0, self.MAX_SPEED)
-	
-	velocity += self.direction.normalized() * self.speed
-	
-	var new_pos = self.position
-	new_pos += velocity * delta
-	new_pos.x = clamp(new_pos.x, 60, screensize.x - 60)
-	new_pos.y = clamp(new_pos.y, 60, screensize.y - 60)
-	
-	self.position = new_pos
-	
-	pass
-
-func tilt(direction):
-	# Play tilt animation for the correct direction
-	var tilt_str = "tilt_%s"
-	self.anim_player.play(tilt_str % direction)
-	pass
-
-func return_to_neutral(from_dir):
-	var tilt_str = "tilt_%s"
-	self.anim_player.play_backwards(tilt_str % from_dir)
+	if(shoot):
+		self.shoot()
 	pass
 
 func shoot():
-	# Create a projectile
-	# Play shooting animation
+	var gun_node = $Gun
+	if gun_node:
+		var cannons = gun_node.get_children()
+		if cannons.size() > 0:
+			for i in gun_node.GUN_LEVEL_POSITIONS[gun_node.level]:
+				var cannon = cannons[i]
+				var pos = cannon.get_global_position()
+				gun_node.create_projectile(pos)
+				pass
+	#for i range(cannons.length):
+	#	if 
+	#	var cannon = $Gun.get_children()[i]
+	#	var pos = cannon.get_global_position()
+	#	$Gun.create_projectile(pos)
 	pass
 
 func set_health(new_health):

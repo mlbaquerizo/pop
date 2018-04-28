@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "# Gun
+
+extends Node2D
+
+var level = 0
+
+export(Array, Array, int) var GUN_POSITIONS
+# = [
+#	[0],
+#	[1,2],
+#	[0,1,2]
+#]	
+
+# Preload the projectile scene used by the gun
+const SCN_PROJECTILE = preload(\"res://scenes/Projectile.tscn\")
+
+func _ready():
+	pass
+
+func _input(event):
+	var shoot = event.is_action_pressed(\"shoot\")
+	
+	if(shoot):
+		print(\"PEW\")
+		self.shoot()
+	pass
+
+func create_projectile(pos):
+	var projectile = SCN_PROJECTILE.instance()
+	projectile.position = pos
+	Utils.scene_root.add_child(projectile)
+	pass
+"
+_sections_unfolded = [ "Resource" ]
+
+[node name="Gun" type="Node2D"]
+
+script = SubResource( 1 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+GUN_POSITIONS = null
+
+[node name="Position0" type="Position2D" parent="." index="0"]
+
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Position1" type="Position2D" parent="." index="1"]
+
+[node name="Position2" type="Position2D" parent="." index="2"]
+
+
