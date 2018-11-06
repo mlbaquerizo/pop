@@ -20,6 +20,8 @@ func _ready():
 	screensize = get_viewport_rect().size
 	set_process(true)
 	set_process_input(true)
+	
+	self.add_to_group("ship")
 	pass
 
 func _input(event):
