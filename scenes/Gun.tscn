@@ -6,7 +6,7 @@ script/source = "# Gun
 
 extends Node2D
 
-var level = 0
+var level = 1
 
 export(Array, Array, int) var GUN_POSITIONS
 # = [
@@ -37,7 +37,7 @@ func create_projectile(pos):
 "
 _sections_unfolded = [ "Resource" ]
 
-[node name="Gun" type="Node2D"]
+[node name="Gun" type="Node2D" index="0"]
 
 script = SubResource( 1 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
